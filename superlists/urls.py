@@ -20,4 +20,5 @@ import lists.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', lists.views.home_page, name='home'),
+    path('lists/one-list-to-rule-them-all', lists.views.view_list, name='view_list')
 ]

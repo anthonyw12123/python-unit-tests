@@ -80,8 +80,8 @@ class NewVisitorTest(LiveServerTestCase):
         self.verify_row_against_table('in', '1: Buy peacock feathers')
 
         # She notices her list has a unique URLs
-        edit_list_url = self.browser.current_url
-        self.assertRegex(edit_list_url, '/lists/.+')
+        edith_list_url = self.browser.current_url
+        self.assertRegex(edith_list_url, '/lists/.+')
 
         # Now a new user, Francis, comes along to the site.
 

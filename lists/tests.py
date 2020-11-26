@@ -34,15 +34,6 @@ class HomePageTest(TestCase):
         self.client.get( '/')
         self.assertEqual(Item.objects.count(), 0)
 
-    def test_displays_all_list_items(self):
-        Item.objects.create(text='Item1')
-        Item.objects.create(text='Item42')
-
-        response = self.client.get('/')
-
-        self.assertIn('Item1', response.content.decode())
-        self.assertIn('Item42', response.content.decode())
-
 
 class ItemModelTests(TestCase):
     def test_saving_and_retrieving_items(self):
@@ -63,6 +54,10 @@ class ItemModelTests(TestCase):
         self.assertEqual(second_saved_item.text, 'Item the second')
 
 class ListViewTest(TestCase):
+    def test_uses_list_template(self):
+        response = self.client.get('/lists/one-list-to-rule-them-all')
+        self.assertTemplateUsed(response, 'list.html')
+
     def test_displays_all_list_items(self):
         Item.objects.create(text='Item1')
         Item.objects.create(text='Item42')

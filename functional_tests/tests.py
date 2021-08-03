@@ -124,9 +124,18 @@ class NewVisitorTest(LiveServerTestCase):
 
         # She notices the inpux box is nicely centered
         inputbox = self.browser.find_element_by_id('id_new_item')
+        self.assertAlmostEqual(
+            inputbox.location['x'] + inputbox.size['width'] / 2,
+            512,
+            delta=10
+        )
+        # She then creates a new list
         inputbox.send_keys('testing')
-        inputbox.send_keys('Keys.ENTER')
-        self.verify_row_against_table('in', '1: testing')
+        inputbox.send_keys(Keys.ENTER)
+        # Sometimes had issues with element not existing yet
+        time.sleep(1)
+        # She notices the new list is also centered
+        inputbox = self.browser.find_element_by_id('id_new_item')
         self.assertAlmostEqual(
             inputbox.location['x'] + inputbox.size['width'] / 2,
             512,

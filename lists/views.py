@@ -6,7 +6,6 @@ def home_page(request):
 
 def view_list(request, list_id):
     current_list = List.objects.get(id=int(list_id))
-    items = Item.objects.filter(list=current_list)
     return render(request, 'list.html', {'list': current_list})
 
 def new_list(request):
